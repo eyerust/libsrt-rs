@@ -2,7 +2,7 @@
 name = "libsrt-sys"
 version = "1.4.13"
 authors = ["Hieu Nguyen <nthieu173@gmail.com>"]
-edition = "2018"
+edition = "2021"
 license = "MPL-2.0"
 description = "Bindings for libsrt"
 links = "srt"
@@ -12,5 +12,5 @@ repository = "https://github.com/nthieu173/srt-rs"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [build-dependencies]
-cmake = "0.1"
-bindgen = "0.56"
+cmake = "0.1.48"
+bindgen = "0.59.2"

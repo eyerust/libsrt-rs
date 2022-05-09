@@ -185,7 +185,9 @@ fn error_msg(err: &SrtError) -> String {
         SrtError::NoServer => "Connection timed out while attempting to connect to the remote address".to_string(),
         SrtError::ConnRej(reason) => format!("Connection has been rejected: {:?}", reason),
         SrtError::SockFail => "An error occurred when trying to call a system function on an internally used UDP socket".to_string(),
-        SrtError::SecFail => "A possible tampering with the handshake packets was detected, or encryption request wasn't properly fulfilled.".to_string(),
+        SrtError::SecFail => {
+            "A possible tampering with the handshake packets was detected, or encryption request wasn't properly fulfilled.".to_string()
+        }
         SrtError::Closed => "A socket that was vital for an operation called in blocking mode has been closed during the operation".to_string(),
         SrtError::ConnFail => "General connection failure of unknown details".to_string(),
         SrtError::ConnLost => "The socket was properly connected, but the connection has been broken".to_string(),
