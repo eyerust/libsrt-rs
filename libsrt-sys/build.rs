@@ -11,8 +11,24 @@ fn main() {
             config.define("USE_STATIC_LIBSTDCXX", "ON");
             config.build()
         };
-        lib_dir.push("lib");
-        println!("cargo:rustc-link-search={}", lib_dir.display());
+        println!(
+            "cargo:rustc-link-search={}",
+            {
+                let mut lib_dir = lib_dir.clone();
+                lib_dir.push("lib");
+                lib_dir
+            }
+            .display()
+        );
+        println!(
+            "cargo:rustc-link-search={}",
+            {
+                let mut lib_dir = lib_dir.clone();
+                lib_dir.push("lib64");
+                lib_dir
+            }
+            .display()
+        );
         println!("cargo:rustc-link-lib=static=srt");
         println!("cargo:rustc-link-lib=dylib=stdc++");
         println!("cargo:rustc-link-lib=dylib=crypto");
