@@ -630,8 +630,8 @@ impl SrtSocket {
     }
 
     pub fn get_stream_id(&self) -> Result<String> {
-        let mut id = String::from_iter([' '; 512].iter());
-        let mut id_len = mem::size_of_val(&id) as i32;
+        let mut id = [0u8; 512];
+        let mut id_len = mem::size_of_val(&id) as c_int;
         let result = unsafe {
             srt::srt_getsockflag(
                 self.id,
@@ -640,8 +640,7 @@ impl SrtSocket {
                 &mut id_len as *mut c_int,
             )
         };
-        id.truncate(id_len as usize);
-        error::handle_result(id, result)
+        error::handle_result(std::str::from_utf8(&id[..id_len as usize]).unwrap().to_owned(), result)
     }
 
     pub fn get_too_late_packet_drop(&self) -> Result<bool> {
